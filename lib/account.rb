@@ -28,7 +28,9 @@ class Account
   end
 
   def record_transaction(deposited_amount, withdrawn_amount)
-    transactions.unshift("#{current_time} || #{sprintf('%.2f', deposited_amount) + " " if deposited_amount}|| #{sprintf('%.2f', withdrawn_amount) + " " if withdrawn_amount}|| #{sprintf('%.2f', @balance)}")
+    transactions.unshift("#{current_time} || #{sprintf('%.2f', deposited_amount) + " " if deposited_amount}"\
+    "|| #{sprintf('%.2f', withdrawn_amount) + " " if withdrawn_amount}"\
+    "|| #{sprintf('%.2f', @balance)}")
   end
 
   def current_time
