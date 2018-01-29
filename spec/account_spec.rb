@@ -8,6 +8,10 @@ describe Account do
     expect(account.balance).to eq 0
   end
 
+  it 'initialises with an empty transactions array' do
+    expect(account.transactions).to eq []
+  end
+
   describe "#deposit" do
     it 'adds the amount given to the account balance' do
       expect{account.deposit(1000)}.to change{account.balance}.by(1000)
