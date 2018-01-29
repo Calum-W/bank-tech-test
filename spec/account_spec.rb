@@ -17,9 +17,15 @@ describe Account do
       expect{account.deposit(1000)}.to change{account.balance}.by(1000)
     end
 
-    it 'adds a single transaction to the statements array in the correct format' do
+    it 'adds a single transaction to the transactions array in the correct format' do
       account.deposit(1000)
       expect(account.transactions).to eq [Time.now.strftime("%d/%m/%Y") + " || 1000.00 || || 1000.00"]
+    end
+
+    it 'adds multiple deposits to the transactions array with newer deposits appearing at the beginning' do
+      account.deposit(1000)
+      account.deposit(200)
+      expect(account.transactions).to eq [Time.now.strftime("%d/%m/%Y") + " || 200.00 || || 1200.00", Time.now.strftime("%d/%m/%Y") + " || 1000.00 || || 1000.00"]
     end
   end
 
@@ -28,9 +34,29 @@ describe Account do
       expect{account.withdraw(1000)}.to change{account.balance}.by(-1000)
     end
 
-    it 'adds a single transaction to the statements array in the correct format' do
+    it 'adds a single transaction to the transactions array in the correct format' do
       account.withdraw(1000)
       expect(account.transactions).to eq [Time.now.strftime("%d/%m/%Y") + " || || 1000.00 || -1000.00"]
+    end
+
+    it 'adds multiple withdrawals to the transactions array with newer withdrawals appearing at the beginning' do
+      account.withdraw(1000)
+      account.withdraw(200)
+      expect(account.transactions).to eq [Time.now.strftime("%d/%m/%Y") + " || || 200.00 || -1200.00", Time.now.strftime("%d/%m/%Y") + " || || 1000.00 || -1000.00"]
+    end
+  end
+
+  context 'mixture of deposits and withdrawals' do
+    it 'updates the balance correctly as withdrawals and deposits are made' do
+      account.deposit(1000)
+      account.withdraw(200)
+      expect(account.balance).to eq 800
+    end
+
+    it 'adds a mixture of correctly formatted withdrawals and deposits to the transactions array' do
+      account.deposit(1000)
+      account.withdraw(200)
+      expect(account.transactions).to eq [Time.now.strftime("%d/%m/%Y") + " || || 200.00 || 800.00", Time.now.strftime("%d/%m/%Y") + " || 1000.00 || || 1000.00"]
     end
   end
 
