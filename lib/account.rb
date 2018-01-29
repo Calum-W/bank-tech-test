@@ -8,6 +8,7 @@ class Account
   end
 
   def deposit(amount)
+    raise 'Cannot deposit an amount of 0 or less' if amount <= 0
     @balance += amount
     record_transaction(amount, false)
   end
