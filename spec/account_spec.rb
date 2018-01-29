@@ -29,11 +29,11 @@ describe Account do
     end
 
     it 'raises an error if the amount is 0' do
-      expect { account.deposit(0) }.to raise_error 'Cannot deposit an amount of 0 or less'
+      expect { account.deposit(0) }.to raise_error 'Please enter an amount greater than 0'
     end
 
     it 'raises an error if the amount is negative' do
-      expect { account.deposit(-100) }.to raise_error 'Cannot deposit an amount of 0 or less'
+      expect { account.deposit(-100) }.to raise_error 'Please enter an amount greater than 0'
     end
   end
 
@@ -51,6 +51,14 @@ describe Account do
       account.withdraw(1000)
       account.withdraw(200)
       expect(account.transactions).to eq [Time.now.strftime("%d/%m/%Y") + " || || 200.00 || -1200.00", Time.now.strftime("%d/%m/%Y") + " || || 1000.00 || -1000.00"]
+    end
+
+    it 'raises an error if the amount is 0' do
+      expect { account.withdraw(0) }.to raise_error 'Please enter an amount greater than 0'
+    end
+
+    it 'raises an error if the amount is negative' do
+      expect { account.withdraw(-100) }.to raise_error 'Please enter an amount greater than 0'
     end
   end
 

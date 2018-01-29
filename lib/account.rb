@@ -8,12 +8,13 @@ class Account
   end
 
   def deposit(amount)
-    raise 'Cannot deposit an amount of 0 or less' if amount <= 0
+    check_amount(amount)
     @balance += amount
     record_transaction(amount, false)
   end
 
   def withdraw(amount)
+    check_amount(amount)
     @balance -= amount
     record_transaction(false, amount)
   end
@@ -26,6 +27,10 @@ class Account
 
   def header
     "date || credit || debit || balance\n"
+  end
+
+  def check_amount(amount)
+    raise 'Please enter an amount greater than 0' if amount <= 0
   end
 
   def record_transaction(deposited_amount, withdrawn_amount)
