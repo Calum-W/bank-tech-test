@@ -17,9 +17,9 @@ describe Account do
       expect{account.deposit(1000)}.to change{account.balance}.by(1000)
     end
 
-    it 'adds a single transaction to the statements array' do
+    it 'adds a single transaction to the statements array in the correct format' do
       account.deposit(1000)
-      expect(account.statements).to eq [Time.now.strftime("%d/%m/%Y") + " || 1000.00 || || 1000.00"]
+      expect(account.transactions).to eq [Time.now.strftime("%d/%m/%Y") + " || 1000.00 || || 1000.00"]
     end
   end
 

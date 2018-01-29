@@ -9,6 +9,7 @@ class Account
 
   def deposit(amount)
     @balance += amount
+    transactions.unshift(Time.now.strftime("%d/%m/%Y") + " || 1000.00 || || 1000.00")
   end
 
   def withdraw(amount)
