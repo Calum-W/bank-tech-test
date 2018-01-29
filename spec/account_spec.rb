@@ -69,5 +69,12 @@ describe Account do
       account.deposit(1000)
       expect{ account.print_statement }.to output("date || credit || debit || balance\n#{Time.now.strftime("%d/%m/%Y")} || 1000.00 || || 1000.00\n").to_stdout
     end
+
+    it 'prints multiple transactions under the header' do
+      account.deposit(1000)
+      account.deposit(2000)
+      account.withdraw(500)
+      expect{ account.print_statement }.to output("date || credit || debit || balance\n#{Time.now.strftime("%d/%m/%Y")} || || 500.00 || 2500.00\n#{Time.now.strftime("%d/%m/%Y")} || 2000.00 || || 3000.00\n#{Time.now.strftime("%d/%m/%Y")} || 1000.00 || || 1000.00\n").to_stdout
+    end
   end
 end
