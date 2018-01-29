@@ -14,6 +14,7 @@ class Account
 
   def withdraw(amount)
     @balance -= amount
+    transactions.unshift("#{Time.now.strftime("%d/%m/%Y")} || || #{sprintf('%.2f', amount)} || #{sprintf('%.2f', @balance)}")
   end
 
   def print_statement
