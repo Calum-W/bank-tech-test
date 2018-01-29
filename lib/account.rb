@@ -18,7 +18,7 @@ class Account
   end
 
   def print_statement
-    puts header
+    puts header + @transactions.join("\n")
   end
 
   private

@@ -67,8 +67,7 @@ describe Account do
 
     it 'prints a single transaction under the header' do
       account.deposit(1000)
-
-      expect{ account.print_statement }.to output("date || credit || debit || balance\n#{Time.now.strftime("%d/%m/%Y")} || 1000.00 || || 1000.00").to_stdout
+      expect{ account.print_statement }.to output("date || credit || debit || balance\n#{Time.now.strftime("%d/%m/%Y")} || 1000.00 || || 1000.00\n").to_stdout
     end
   end
 end
