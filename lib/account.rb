@@ -9,12 +9,12 @@ class Account
 
   def deposit(amount)
     @balance += amount
-    transactions.unshift("#{Time.now.strftime("%d/%m/%Y")} || #{sprintf('%.2f', amount)} || || #{sprintf('%.2f', @balance)}")
+    transactions.unshift("#{current_time} || #{sprintf('%.2f', amount)} || || #{sprintf('%.2f', @balance)}")
   end
 
   def withdraw(amount)
     @balance -= amount
-    transactions.unshift("#{Time.now.strftime("%d/%m/%Y")} || || #{sprintf('%.2f', amount)} || #{sprintf('%.2f', @balance)}")
+    transactions.unshift("#{current_time} || || #{sprintf('%.2f', amount)} || #{sprintf('%.2f', @balance)}")
   end
 
   def print_statement
@@ -25,5 +25,9 @@ class Account
 
   def header
     "date || credit || debit || balance\n"
+  end
+
+  def current_time
+    Time.now.strftime("%d/%m/%Y")
   end
 end
