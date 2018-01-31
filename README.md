@@ -38,3 +38,8 @@ As a bank customer
 So I can keep track of my transactions
 I would like to print a copy of my bank statement
 ```
+
+### Solution
+I decided that the best way to fulfil these criteria was to create one class, which would output the given statement in the same formatting after a series of transactions. I did this by initialising with a balance and a transactions array. Each time a withdrawal/deposit was made, a method would be called that created a formatted statement line to be passed into the start of the transactions array. The print_statemtn method would then simply print the header, along with the transactions array joined with "\n".
+
+After discussing the test with coaches in the afternoon, I discovered that I was wrong to approach a tech test as finding the most simple solution that fulfils only the acceptance criteria. Given my new understanding of tech tests and the expectations employers have, I would have created separate transaction and statement classes.
